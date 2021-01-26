@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+
+  mysql:
+    image: mysql:8.0.22
+    container_name: mysql
+    ports: 
+      - 3306:3306
+    environment:
+      MYSQL_USER: gvendas
+      MYSQL_PASSWORD: gvendas
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: gvendas_db
+
+  jaeger:
+    image: jaegertracing/all-in-one:1.21
+    container_name: jaeger
+    ports: 
+      - 5775:5775/udp
+      - 6831:6831/udp
+      - 6832:6832/udp
+      - 5778:5778
+      - 16686:16686
+      - 14268:14268
+      - 14250:14250
+      - 9411:9411
