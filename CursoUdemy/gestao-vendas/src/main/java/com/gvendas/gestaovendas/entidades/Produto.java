@@ -11,10 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Table(name = "produto")
@@ -24,33 +20,51 @@ public class Produto {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "codigo")
 	private Long codigo;
-	
+
 	@Column(name = "descricao")
-	@NotBlank(message = "Descrição")
-	@Length(min = 3, max = 100, message = "Descrição")
 	private String descricao;
-	
+
 	@Column(name = "quantidade")
-	@NotNull(message = "Quantidade")
 	private Integer quantidade;
-	
-	@NotNull(message = "Preço custo")
+
 	@Column(name = "preco_curto")
 	private BigDecimal precoCusto;
-	
-	@NotNull(message = "Preço venda")
+
 	@Column(name = "preco_venda")
 	private BigDecimal precoVenda;
-	
-	@Length(max = 500, message = "Observação")
+
 	@Column(name = "observacao")
 	private String observacao;
-	
-	@NotNull(message = "Código categoria")
+
 	@ManyToOne
 	@JoinColumn(name = "codigo_categoria", referencedColumnName = "codigo")
 	private Categoria categoria;
 	
+	public Produto() {
+		
+	}
+	
+	public Produto(Long codigo, String descricao, Integer quantidade, BigDecimal precoCusto, BigDecimal precoVenda,
+			String observacao, Categoria categoria) {
+		this.codigo = codigo;
+		this.descricao = descricao;
+		this.quantidade = quantidade;
+		this.precoCusto = precoCusto;
+		this.precoVenda = precoVenda;
+		this.observacao = observacao;
+		this.categoria = categoria;
+	}
+
+	public Produto(String descricao, Integer quantidade, BigDecimal precoCusto, BigDecimal precoVenda,
+			String observacao, Categoria categoria) {
+		this.descricao = descricao;
+		this.quantidade = quantidade;
+		this.precoCusto = precoCusto;
+		this.precoVenda = precoVenda;
+		this.observacao = observacao;
+		this.categoria = categoria;
+	}
+
 	public Long getCodigo() {
 		return codigo;
 	}
