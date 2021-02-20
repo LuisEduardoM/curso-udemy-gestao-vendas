@@ -2,14 +2,19 @@ package com.gvendas.gestaovendas.controlador;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gvendas.gestaovendas.dto.cliente.ClienteResponseDTO;
 import com.gvendas.gestaovendas.entidades.Cliente;
 import com.gvendas.gestaovendas.servico.ClienteServico;
 
@@ -24,16 +29,25 @@ public class ClienteControlador {
 	@Autowired
 	private ClienteServico clienteServico;
 
-	@ApiOperation(value = "Listar", nickname = "listarTodas")
+	@ApiOperation(value = "Listar", nickname = "listarTodosCliente")
 	@GetMapping
-	public List<Cliente> listarTodas() {
-		return clienteServico.listarTodos();
+	public List<ClienteResponseDTO> listarTodas() {
+		return clienteServico.listarTodos().stream().map(cliente -> ClienteResponseDTO.converterParaClienteDTO(cliente))
+				.collect(Collectors.toList());
 	}
 
-	@ApiOperation(value = "Listar por código", nickname = "buscarPorId")
+	@ApiOperation(value = "Listar por código", nickname = "buscarClientePorId")
 	@GetMapping("/{codigo}")
-	public ResponseEntity<Cliente> buscarPorId(@PathVariable Long codigo) {
+	public ResponseEntity<ClienteResponseDTO> buscarPorId(@PathVariable Long codigo) {
 		Optional<Cliente> cliente = clienteServico.buscarPorCodigo(codigo);
-		return cliente.isPresent() ? ResponseEntity.ok(cliente.get()) : ResponseEntity.notFound().build();
+		return cliente.isPresent() ? ResponseEntity.ok(ClienteResponseDTO.converterParaClienteDTO(cliente.get()))
+				: ResponseEntity.notFound().build();
+	}
+
+	@ApiOperation(value = "Salvar", nickname = "salvarCliente")
+	@PostMapping
+	public ResponseEntity<ClienteResponseDTO> salvar(@RequestBody Cliente cliente) {
+		Cliente clienteSalvo = clienteServico.salvar(cliente);
+		return ResponseEntity.status(HttpStatus.CREATED).body(ClienteResponseDTO.converterParaClienteDTO(clienteSalvo));
 	}
 }
