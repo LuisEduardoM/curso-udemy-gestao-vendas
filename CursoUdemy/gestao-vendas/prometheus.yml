@@ -11,4 +11,4 @@ scrape_configs:
     scrape_interval: 5s
     metrics_path: '/actuator/prometheus'
     static_configs:
-      - targets: ['192.168.219.81:8080']
+      - targets: ['172.21.144.1:8080']
