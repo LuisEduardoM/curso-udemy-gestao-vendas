@@ -35,6 +35,16 @@ public class ItemVenda {
 	@JoinColumn(name = "codigo_venda", referencedColumnName = "codigo")
 	private Venda venda;
 
+	public ItemVenda() {
+	}
+
+	public ItemVenda(Integer quantidade, BigDecimal precoVendido, Produto produto, Venda venda) {
+		this.quantidade = quantidade;
+		this.precoVendido = precoVendido;
+		this.produto = produto;
+		this.venda = venda;
+	}
+
 	public Long getCodigo() {
 		return codigo;
 	}
