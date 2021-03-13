@@ -2,6 +2,9 @@ package com.gvendas.gestaovendas.dto.venda;
 
 import java.math.BigDecimal;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -9,12 +12,16 @@ import io.swagger.annotations.ApiModelProperty;
 public class ItemVendaRequestDTO {
 	
 	@ApiModelProperty(value = "Código produto")
+	@NotNull(message = "Código produto")
 	private Long codigoProduto;
 	
 	@ApiModelProperty(value = "Quantidade")
+	@NotNull(message = "Quantidade")
+	@Min(value = 1, message = "Quantidade")
 	private Integer quantidade;
 	
 	@ApiModelProperty(value = "Preço Vendido")
+	@NotNull(message = "Preço vendido")
 	private BigDecimal precoVendido;
 
 	public Long getCodigoProduto() {

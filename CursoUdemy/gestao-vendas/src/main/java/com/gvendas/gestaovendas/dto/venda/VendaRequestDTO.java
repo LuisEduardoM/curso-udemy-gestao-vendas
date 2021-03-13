@@ -3,6 +3,9 @@ package com.gvendas.gestaovendas.dto.venda;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -10,9 +13,12 @@ import io.swagger.annotations.ApiModelProperty;
 public class VendaRequestDTO {
 
 	@ApiModelProperty(value = "Data")
+	@NotNull(message = "Data")
 	private LocalDate data;
 
 	@ApiModelProperty(value = "Itens da venda")
+	@NotNull(message = "Itens venda")
+	@Valid
 	private List<ItemVendaRequestDTO> itensVendaDto;
 
 	public LocalDate getData() {
