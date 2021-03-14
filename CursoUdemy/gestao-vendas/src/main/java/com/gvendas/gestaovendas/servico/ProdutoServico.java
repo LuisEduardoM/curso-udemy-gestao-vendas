@@ -47,6 +47,10 @@ public class ProdutoServico {
 		Produto produto = validarProdutoExiste(codigoProduto, codigoCategoria);
 		produtoRepositorio.delete(produto);
 	}
+	
+	protected void atualizarQuantidadeAposVenda(Produto produto) {
+		produtoRepositorio.save(produto);
+	}
 
 	protected Produto validarProdutoExiste(Long codigoProduto) {
 		Optional<Produto> produto = produtoRepositorio.findById(codigoProduto);
