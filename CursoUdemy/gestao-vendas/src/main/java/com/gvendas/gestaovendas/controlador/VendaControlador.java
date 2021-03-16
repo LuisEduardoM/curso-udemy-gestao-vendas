@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -45,6 +46,12 @@ public class VendaControlador {
 	@PostMapping("/cliente/{codigoCliente}")
 	public ResponseEntity<ClienteVendaResponseDTO> salvar(@PathVariable Long codigoCliente, @Valid @RequestBody VendaRequestDTO vendaDto){
 		return ResponseEntity.status(HttpStatus.CREATED).body(vendaServico.salvar(codigoCliente, vendaDto));
+	}
+	
+	@ApiOperation(value = "Atualizar venda", nickname = "atualizarVenda")
+	@PutMapping("/{codigoVenda}/cliente/{codigoCliente}")
+	public ResponseEntity<ClienteVendaResponseDTO> atualizar(@PathVariable Long codigoVenda, @PathVariable Long codigoCliente, @Valid @RequestBody VendaRequestDTO vendaDto){
+		return ResponseEntity.ok(vendaServico.atualizar(codigoVenda, codigoCliente, vendaDto));
 	}
 	
 	@ApiOperation(value = "Deletar venda", nickname = "deletarVenda")
