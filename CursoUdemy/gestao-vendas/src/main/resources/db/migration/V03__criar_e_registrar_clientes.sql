@@ -1,5 +1,5 @@
 CREATE TABLE cliente (
-	codigo BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
+	codigo BIGINT PRIMARY KEY AUTO_INCREMENT,
 	nome VARCHAR(50) NOT NULL,
 	telefone VARCHAR(20) NOT NULL,
 	ativo BOOLEAN NOT NULL,
@@ -10,7 +10,7 @@ CREATE TABLE cliente (
 	cep VARCHAR(30),
 	cidade VARCHAR(30),
 	estado VARCHAR(30)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
 
 INSERT INTO cliente (nome, telefone, ativo, logradouro, numero, complemento, bairro, cep, cidade, estado) values ('João Silva', '(34) 99261-4270', true, 'Rua do Abacaxi', '10', null, 'Brasil', '38.400-122', 'Uberlândia', 'MG');
 INSERT INTO cliente (nome, telefone, ativo, logradouro, numero, complemento, bairro, cep, cidade, estado) values ('Maria Rita', '(34) 99261-4270', true, 'Rua do Sabiá', '110', 'Apto 101', 'Colina', '11.400-122', 'Ribeirão Preto', 'SP');

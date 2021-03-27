@@ -1,9 +1,9 @@
 CREATE TABLE venda (
-	codigo BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
+	codigo BIGINT PRIMARY KEY AUTO_INCREMENT,
 	data DATE NOT NULL,
-	codigo_cliente BIGINT(20) NOT NULL,
+	codigo_cliente BIGINT NOT NULL,
 	FOREIGN KEY (codigo_cliente) REFERENCES cliente(codigo)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
 
 INSERT INTO venda(data, codigo_cliente) VALUES ('2021-01-02', 1);
 INSERT INTO venda(data, codigo_cliente) VALUES ('2021-01-08', 1);

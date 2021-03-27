@@ -1,12 +1,12 @@
 CREATE TABLE item_venda (
-	codigo BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
-	codigo_produto BIGINT(20) NOT NULL,
-	codigo_venda BIGINT(20) NOT NULL,
+	codigo BIGINT PRIMARY KEY AUTO_INCREMENT,
+	codigo_produto BIGINT NOT NULL,
+	codigo_venda BIGINT NOT NULL,
 	quantidade INTEGER NOT NULL,
 	preco_vendido DECIMAL(10,2) NOT NULL,
 	FOREIGN KEY (codigo_produto) REFERENCES produto(codigo),
 	FOREIGN KEY (codigo_venda) REFERENCES venda(codigo)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
 
 INSERT INTO item_venda(codigo_produto, codigo_venda, quantidade, preco_vendido) VALUES (1, 1, 1, 870);
 INSERT INTO item_venda(codigo_produto, codigo_venda, quantidade, preco_vendido) VALUES (15, 1, 1, 249);
